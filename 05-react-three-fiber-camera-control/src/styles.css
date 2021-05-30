@@ -1,0 +1,18 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+.canvas {
+  background: black;
+  position: fixed;
+}
