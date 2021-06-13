@@ -1,5 +1,5 @@
 import "./styles.css";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useSpring, animated, config } from "react-spring/three";
 
@@ -9,18 +9,16 @@ const sizes = {
 };
 
 const Box = () => {
-  const { x, y, z } = useSpring({
-    x: 0,
-    y: 0,
-    z: 0,
-    loop: { reverse: true },
+  const [isClicked, setClicked] = useState(false);
+  const { position } = useSpring({
+    position: isClicked ? [3, 0, 0] : [0, 0, 0],
     config: config.wobbly
   });
-  useEffect(() => {
-    x.start({ from: { x: 0 }, to: { x: 1 } });
-  });
   return (
-    <animated.mesh position={x}>
+    <animated.mesh
+      position={position}
+      onClick={(event) => setClicked(!isClicked)}
+    >
       <meshStandardMaterial color="hotpink" />
       <boxGeometry args={[1, 1, 1]} />
     </animated.mesh>
@@ -43,3 +41,4 @@ export default function App() {
     </Canvas>
   );
 }
+
